@@ -1,0 +1,14 @@
+{
+  "name": "tomato-scraper",
+  "version": "1.0.0",
+  "description": "Finds all movie ratings, titles and release dates for popular actors without using the API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kim Thompson",
+  "license": "ISC",
+  "dependencies": {
+    "scrape-it": "^3.2.2"
+  }
+}
