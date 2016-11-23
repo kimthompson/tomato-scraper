@@ -9,6 +9,7 @@
   "author": "Kim Thompson",
   "license": "ISC",
   "dependencies": {
-    "scrape-it": "^3.2.2"
+    "cheerio": "^0.22.0",
+    "request": "^2.79.0"
   }
 }
