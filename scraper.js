@@ -3,13 +3,14 @@ var cheerio = require('cheerio');
 var url = 'https://www.rottentomatoes.com/celebrity/robert_de_niro'
 
 request(url, function( error, response, body) {
-  if(!error) {
+  if(!error && response.statusCode == 200) {
     var $ = cheerio.load(body);
-    // var name = $('#main_container > div.col.col-left-center.col-full-xs > div.content_box > div > div.col-full-xs.col-sm-17.celeb_name').text();
-    var movies = $("tr[itemtype='https://schema.org/Movie']");
+    var movies = $("#filmographyTbl:nth-child(1)").find('tr');
+    // console.log("Movies: " + movies);
+    var movieLength = movies.length - 1; // Originally counted the header row
+    console.log("# movies: " + movieLength);
     var json = [];
-
-    for (var i = 0; i < movies.length; i++) {
+    for (var i = 0; i < movieLength; i++) {
       var jsonMember = {rating: "", title: "", year: ""};
       var rawRating = $("#filmographyTbl:nth-child(1) > tbody > tr:nth-child(" + i + ") > td:nth-child(1)").text();
       var rating = rawRating.trim();
@@ -19,6 +20,7 @@ request(url, function( error, response, body) {
         jsonMember.title = title;
         var year = $("#filmographyTbl:nth-child(1) > tbody > tr:nth-child(" + i + ") > td:nth-child(5)").text();
         jsonMember.year = year;
+        console.log("Movie " + i + "item: " + jsonMember);
         json.push(jsonMember);
       }
     }
